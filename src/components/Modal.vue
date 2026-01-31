@@ -18,6 +18,7 @@
   import MoneyRequestModal from "./MoneyRequestModal.vue"
   import PaymentRequestModal from "./PaymentRequestModal.vue"
   import PaymentRequestListModal from "./PaymentRequestListModal.vue"
+  import ImportPaymentRequestsModal from "./ImportPaymentRequestsModal.vue"
 
   @Options({
     name: "Modal",
@@ -31,6 +32,7 @@
       MoneyRequestModal,
       PaymentRequestModal,
       PaymentRequestListModal,
+      ImportPaymentRequestsModal,
     },
     data() {
       return {
