@@ -92,7 +92,12 @@
         ],
         async function (this: any): Promise<void> {
           try {
-            this.paymentRequestList = await this.account._obj.getPaymentRequests(["open", "refused"])
+            this.paymentRequestList = (
+              await this.account._obj.getPaymentRequests(["open", "refused"])
+            ).map((paymentRequest: any) => {
+              paymentRequest.currency = this.account.curr
+              return paymentRequest
+            })
           } catch (err) {
             throw new UIError(
               this.$gettext(
