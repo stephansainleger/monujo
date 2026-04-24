@@ -1,11 +1,13 @@
 <template>
   <div id="transaction-list-recent">
-    <div
-      class="section-card"
+    <FoldableSectionCard
       id="the-transaction-list"
       v-if="hasFinishedFirstLoading"
+      :isFolded="isFolded"
     >
-      <h2 class="custom-card-title">{{ $gettext("Transactions") }}</h2>
+      <template #title>
+        {{ $gettext("Transactions") }}
+      </template>
       <div
         class="notification is-danger is-light"
         v-if="isTransactionsLoadingError"
@@ -60,13 +62,14 @@
           </button>
         </div>
       </div>
-    </div>
+    </FoldableSectionCard>
   </div>
 </template>
 
 <script lang="ts">
   import { Options, Vue } from "vue-class-component"
   import TransactionItem from "./TransactionItem.vue"
+  import FoldableSectionCard from "./FoldableSectionCard.vue"
   import { mapModuleState } from "@/utils/vuex"
   import { showSpinnerMethod, replaceWithLoader } from "@/utils/showSpinner"
   import applyDecorators from "@/utils/applyDecorators"
@@ -76,9 +79,14 @@
     props: {
       refreshToggle: Boolean, // change of this props requests a refresh
       account: Object,
+      isFolded: {
+        type: Boolean,
+        default: false,
+      },
     },
     components: {
       TransactionItem,
+      FoldableSectionCard,
     },
     data(this: any) {
       return {
